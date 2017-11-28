@@ -3,7 +3,7 @@ package sources;
 import java.io.*;
 import java.net.*;
 
-public class RecibirArch {
+public class RecibirArch extends Thread {
     public static void main(String[] args) {
         try{
             int pto = 9876;
