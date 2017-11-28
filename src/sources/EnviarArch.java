@@ -8,9 +8,20 @@ import java.net.Socket;
 import javax.swing.JFileChooser;
 
 public class EnviarArch extends Thread{
+    String path;
+
+    public EnviarArch() {
+        this.path = "archivos"+File.separator;
+    }
     
-    public void enviar(String path, int nPartes, int parte){
-        
+    /**
+     * La clase 
+     * @param nombreArch: Nombre del Archivo que se va solicitar
+     * @param nPart: Numero de partes en que se va a dividir archivo
+     * @param parte : Parte que se desea
+     */
+    public void enviar(String nombreArch, int nPart, int parte){
+        File f = new  File(path+nombreArch);
     }
     
     public static void main(String[] args) {
@@ -32,6 +43,7 @@ public class EnviarArch extends Thread{
                     long tam = f.length(); //OBTENIENDO TAMAÑO DEL ARCHVIO
 
                     System.out.println("Inicia Transferenia del archivo" + ruta + "\n");
+                    System.out.println("Desde la direccion " + cl.getInetAddress() + "\n");
                     int porcentaje = 0,n;
                     long enviados = 0;
                     
