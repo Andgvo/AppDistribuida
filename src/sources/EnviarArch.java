@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 
 public class EnviarArch extends Thread{
     
-    public void enviar(String path){
+    public void enviar(String path, int nPartes, int parte){
         
     }
     

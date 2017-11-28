@@ -1,10 +1,11 @@
 Subir cambios (con el punto se agregan todos):
 git add .
 
-Mandar mensaje de la edicion
+Mandar mensaje de la edicion o seccion que se modifico
 git commit -m "mensaje_de_edicion"
 
 Subir cambios 
 git push origin master
 
 Actualizar repositarios
+git pull origin master

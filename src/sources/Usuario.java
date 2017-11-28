@@ -30,13 +30,17 @@ public class Usuario implements Serializable{
     public int getTemp() {
         return temp;
     }
+    
+    public void setIpDir(String IpDir){
+        this.ipDir = IpDir;
+    }
 
     public void setTemp(int temp) {
         this.temp = temp;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Usuario{" + "nameServer=" + nameServer + ", ipDir=" + ipDir + ", pto=" + pto + ", temp=" + temp + '}';
-    }
+    }*/
 }
