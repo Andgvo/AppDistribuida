@@ -36,7 +36,7 @@ public class ServidorMulticast implements Runnable{
                 oos.flush();
                 //Obtener bytes del objeto
                 byte[] b = baos.toByteArray();
-                System.out.println("S enviaran los siguientes bytes: " + b.length);
+                //System.out.println("S enviaran los siguientes bytes: " + b.length);
                 DatagramPacket p = new DatagramPacket(b, b.length, gpo, PORT);
                 ms.send(p);
                 oos.close();
