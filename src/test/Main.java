@@ -1,8 +1,10 @@
 package test;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Iterator;
 import java.util.Scanner;
+import javax.net.ssl.SSLServerSocket;
 import sources.*;
 
 public class Main {
@@ -13,8 +15,19 @@ public class Main {
         System.out.println("Introduce tu nombre de usuario");
         String nick = sc.nextLine();
         
+        int port = 8000;
+        while(true){
+            try {
+                ServerSocket ss = new ServerSocket(port);
+                System.out.println("SE conecto con puerto: " + port);
+                break;
+            } catch(Exception ex){
+                port++;
+            }
+        }
+        
         ClienteMulticast cm = new ClienteMulticast(nick, usersList);
-        ServidorMulticast sm = new ServidorMulticast(nick, "localhost", 8001);
+        ServidorMulticast sm = new ServidorMulticast(nick, "localhost", port);
         
         Thread trSM = new Thread(sm);
         Thread trCM = new Thread(cm);
