@@ -54,7 +54,5 @@ public class RecibirArch extends Thread {
         ServerSocket s = new ServerSocket(pto);
         RecibirArch ra = new RecibirArch(s);
         ra.start();
-        ra.start();
-        ra.start();
     }
 }
