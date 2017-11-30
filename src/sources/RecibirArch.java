@@ -9,7 +9,7 @@ public class RecibirArch extends Thread {
 
     public RecibirArch(ServerSocket s) {
         this.s = s;
-        this.path = System.getProperty("user.dir");
+        this.path = System.getProperty("user.dir")+File.separator+"archivos"+File.separator;
     }
     
      @Override
