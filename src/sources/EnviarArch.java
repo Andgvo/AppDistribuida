@@ -5,13 +5,17 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JFileChooser;
 
 public class EnviarArch extends Thread{
     String path;
-
-    public EnviarArch() {
+    Socket s;
+    String host = "127.0.0.1"; 
+    
+    public EnviarArch(Socket s) {
+        this.s = s;
         this.path = "archivos"+File.separator;
     }
     
@@ -24,7 +28,7 @@ public class EnviarArch extends Thread{
     public void enviar(String nombreArch, int nPart, int parte){
         try{
             File f = new  File(path+nombreArch);
-            String host = "127.0.0.1"; 
+            
             int pto = 9876;
             Socket cl = new Socket(host, pto); //CREANDO SOCKET
             String nombre = f.getName(); 
