@@ -45,12 +45,18 @@ public class EnviarArch extends Thread{
             DataInputStream dis = new DataInputStream(new FileInputStream(ruta));
 
             //MANDANDO NOMBRE Y TAMAÑO DEL ARCHIVO
-            dos.writeUTF(nombre);
+            dos.writeUTF(nombre+"_"+parte);
             dos.flush();
             dos.writeLong(tam);
             dos.flush();
+            
+            //Tamaño nuevo sera el tamaño entre nPartes.
+            long tamPart = tam/nPart;
+            
+            long nuevoTam = tamPart*parte;
+       
             //ENVIANDO DATOS EN PARTES DE 1500 BYTES
-            while (enviados < tam) {                        
+            while (enviados < tam) {         
                 byte []b = new byte[1500];
                 //LEER CUANTOS BYTES SE ENVIARAN
                 n = dis.read(b);
@@ -75,7 +81,7 @@ public class EnviarArch extends Thread{
         try{
             int pto = 9876;
             EnviarArch ea = new EnviarArch();
-            ea.enviar("Java Datos.pdf", pto, 3, 1);
+            ea.enviar("Java Datos.pdf", pto, 2, 1);
         }catch(Exception e){
             e.printStackTrace();
         }
