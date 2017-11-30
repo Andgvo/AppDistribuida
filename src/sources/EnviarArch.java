@@ -5,14 +5,13 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JFileChooser;
 
 public class EnviarArch extends Thread{
     String path;
     Socket s;
-    String host = "127.0.0.1"; 
+    String host = "127.0.0.1";
     
     public EnviarArch(Socket s) {
         this.s = s;

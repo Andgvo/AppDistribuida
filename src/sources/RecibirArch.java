@@ -4,12 +4,19 @@ import java.io.*;
 import java.net.*;
 
 public class RecibirArch extends Thread {
-    public static void main(String[] args) {
-        try{
-            int pto = 9876;
-            ServerSocket s = new ServerSocket(pto);
-            System.out.println("Servicio iniciado... esperando clientes");
-            for(;;){
+    String path;
+    ServerSocket s;
+
+    public RecibirArch(ServerSocket s) {
+        this.s = s;
+        this.path = System.getProperty("user.dir");
+    }
+    
+     @Override
+     public void run(){
+         try{
+             System.out.println("Esperando archivos");
+             for(;;){
                 Socket cl = s.accept();
                 System.out.println("Cliente conectado desde -> "+cl.getInetAddress()+":"+cl.getPort());
                 DataInputStream dis = new DataInputStream(cl.getInputStream());
@@ -22,7 +29,7 @@ public class RecibirArch extends Thread {
                 int n = 0, porcentaje;
                 tam = dis.readLong();
                 
-                while (r < tam) {                    
+                while (r < tam) {
                     byte[] b = new byte[1500];
                     n = dis.read(b);
                     dos.write(b,0,n);
@@ -37,8 +44,17 @@ public class RecibirArch extends Thread {
                 dis.close();
                 cl.close();
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+         }catch(Exception ex){
+             
+         }
+     }
+    
+    public static void main(String[] args) throws IOException {
+        int pto = 9876;
+        ServerSocket s = new ServerSocket(pto);
+        RecibirArch ra = new RecibirArch(s);
+        ra.start();
+        ra.start();
+        ra.start();
     }
 }
