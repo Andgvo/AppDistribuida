@@ -1,4 +1,4 @@
-package sources;
+package SocketsMulticast;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.net.MulticastSocket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import sources.Usuario;
+import sources.Usuarios;
 
 public class ClienteMulticast implements Runnable{
     private static int TEMP_DEFAULT = 6;

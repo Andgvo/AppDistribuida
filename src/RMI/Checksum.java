@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sources;
+package RMI;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -13,7 +13,6 @@ import java.rmi.RemoteException;
  * @author Andres
  */
 public interface Checksum extends Remote{
-    byte[] createChecksum(String filename) throws Exception, RemoteException; 
-    String getMD5Checksum(String filename) throws Exception, RemoteException;
-    String getLocalCheksum() throws RemoteException;
+    public String getChecksum(String filename) throws RemoteException;
+    public boolean fileExist(String fileName) throws RemoteException;
 }

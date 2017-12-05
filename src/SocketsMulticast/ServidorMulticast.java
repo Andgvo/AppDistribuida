@@ -1,4 +1,4 @@
-package sources;
+package SocketsMulticast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import sources.Usuario;
 
 public class ServidorMulticast implements Runnable{
     private static String IP_DIR = "228.1.1.1";

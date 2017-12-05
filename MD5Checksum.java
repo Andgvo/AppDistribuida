@@ -1,5 +1,3 @@
-package sources;
-
 import java.io.*;
 import java.security.MessageDigest;
 

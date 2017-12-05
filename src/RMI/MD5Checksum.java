@@ -1,4 +1,4 @@
-package sources;
+package RMI;
 
 import java.io.*;
 import java.security.MessageDigest;

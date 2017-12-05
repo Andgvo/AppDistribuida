@@ -1,5 +1,8 @@
 package test;
 
+import RMI.ServidorRMI;
+import SocketsMulticast.ServidorMulticast;
+import SocketsMulticast.ClienteMulticast;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Iterator;
@@ -28,10 +31,15 @@ public class Main {
         ClienteMulticast cm = new ClienteMulticast(nick, usersList);
         ServidorMulticast sm = new ServidorMulticast(nick, "localhost", port);
         
+
+        
         Thread trSM = new Thread(sm);
         Thread trCM = new Thread(cm);
         trSM.start();
         trCM.start();
+
+        //Iniciar Servidor RMI
+        ServidorRMI.iniciarServidorRMI(nick);
         
         System.out.println("Usuarios activos:\n");
         while(true){
