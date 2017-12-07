@@ -5,6 +5,7 @@
  */
 package test;
 
+import Envio.ClienteFlujo;
 import RMI.ClienteRMI;
 import RMI.ServidorRMI;
 import java.awt.Color;
@@ -116,6 +117,8 @@ public class Menu extends JFrame implements ActionListener{
         jScrUsers.setViewportView(jTblUsers);
         jScrUsers.setBounds(565, 10, 135, 495);
         jScrUsers.getViewport().setBackground(new Color(240, 255, 255));
+        jTblUsers.setFocusable(false);
+        jTblUsers.setRowSelectionAllowed(false);
         add(jScrUsers);
         
         //Propiedades de Tabla de Usuarios
@@ -169,7 +172,7 @@ public class Menu extends JFrame implements ActionListener{
         int row;
         if((row = jTblFiles.getSelectedRow()) != -1){
             String fileName = (String)jTblFiles.getValueAt(row, 0);
-            System.out.println("Archivo encontrado:\n" + fileName);
+            ClienteFlujo.downloadFile(fileName, usersList);
         }else
             JOptionPane.showMessageDialog(null, "Selecciona primero un archivo.");
     }

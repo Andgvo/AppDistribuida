@@ -9,30 +9,47 @@ import sources.Usuarios;
 
 public class ClienteRMI {
     
-    public static void main(String[] args) {
-        String host = (args.length < 1) ? null : args[0];
-	try {
-            Registry registry = LocateRegistry.getRegistry(host);	
+    public static long getFileSize(String fileName, String nickUser){
+        try {
+            Registry registry = LocateRegistry.getRegistry(null);	
             //tambien puedes usar getRegistry(String host, int port)
-	    
-	    Checksum stub = (Checksum) registry.lookup("Checksum");
-	    if(stub.fileExist("MD5Checksum.java")){
-                String servidor = stub.getChecksum("MD5Checksum.java");
-                String cliente = MD5Checksum.getMD5Checksum("MD5Checksum.java");
-                if(servidor.compareTo(cliente) == 0)
-                    System.out.println("Si son el mismo Cheksum");
-                else
-                    System.out.println("No son el mismo :c");
-                System.out.println("SERV: " + servidor);
-                System.out.println("CLIENT: " + cliente);
-            }else{
-                System.out.println("No existio");
-            }
-	    
-	} catch (Exception e) {
-	    System.err.println("Client exception: " + e.toString());
-	    e.printStackTrace();
-	}
+            Checksum stub = (Checksum) registry.lookup("Checksum" + nickUser);
+            long size = stub.getFileSize(fileName);
+            System.out.println("tamaño : " +size);
+            return size;
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    
+    public static String obtenerChecksum(String fileName, String nickUser){
+        try {
+            Registry registry = LocateRegistry.getRegistry(null);	
+            //tambien puedes usar getRegistry(String host, int port)
+            Checksum stub = (Checksum) registry.lookup("Checksum" + nickUser);
+            String checksum = stub.getChecksum(fileName);
+            return checksum;
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
+    public static boolean fileExist(String fileName, String nickUser){
+        try {
+            Registry registry = LocateRegistry.getRegistry(null);	
+            //tambien puedes usar getRegistry(String host, int port)
+            Checksum stub = (Checksum) registry.lookup("Checksum" + nickUser);
+            Boolean exist = stub.fileExist(fileName);
+            return exist;
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return false;
     }
     
     public static ArrayList<String> buscarCoincidencias(String fileName, Usuarios usersList){
@@ -46,9 +63,8 @@ public class ClienteRMI {
                 ArrayList<String> files = stub.findFiles(fileName);
                 
                 for (String file : files) {
-                    if(!archivos.contains(file)){
+                    if(!archivos.contains(file))
                         archivos.add(file);
-                    }
                 }
             } catch (Exception e) {
                 System.err.println("Client exception: " + e.toString());

@@ -38,6 +38,12 @@ public class ServidorRMI implements Checksum{
         File f = new File(dirUser + File.separator + fileName);
         return f.exists();
     }
+
+    @Override
+    public long getFileSize(String fileName) throws RemoteException {
+        File f = new File(dirUser + File.separator + fileName);
+        return f.length();
+    }
     
     @Override
     public ArrayList<String> findFiles(String fileName) throws RemoteException {
@@ -52,6 +58,7 @@ public class ServidorRMI implements Checksum{
         return coincidencias;
     }
     
+
     public static void iniciarServidorRMI(String nick){
         try {
             java.rmi.registry.LocateRegistry.createRegistry(1099); //puerto default del rmiregistry
