@@ -7,6 +7,7 @@ package RMI;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,4 +16,5 @@ import java.rmi.RemoteException;
 public interface Checksum extends Remote{
     public String getChecksum(String filename) throws RemoteException;
     public boolean fileExist(String fileName) throws RemoteException;
+    public ArrayList<String> findFiles(String fileName) throws RemoteException;
 }

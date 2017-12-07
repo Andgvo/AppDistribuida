@@ -1,7 +1,7 @@
 package RMI;
 
 import RMI.Checksum;
-import RMI.MD5Checksum;
+import sources.MD5Checksum;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -11,6 +11,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,6 +37,19 @@ public class ServidorRMI implements Checksum{
     public boolean fileExist(String fileName) throws RemoteException {
         File f = new File(dirUser + File.separator + fileName);
         return f.exists();
+    }
+    
+    @Override
+    public ArrayList<String> findFiles(String fileName) throws RemoteException {
+        File dirF = new File(dirUser);
+        File[] files = dirF.listFiles();
+        ArrayList<String> coincidencias = new ArrayList<>();
+        for (File file : files) {
+            if(file.getName().contains(fileName)){
+                coincidencias.add(file.getName());
+            }
+        }
+        return coincidencias;
     }
     
     public static void iniciarServidorRMI(String nick){

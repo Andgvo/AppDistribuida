@@ -1,4 +1,4 @@
-package RMI;
+package sources;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -33,14 +33,5 @@ public class MD5Checksum {
            result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
        }
        return result;
-   }
-
-   public static void main(String args[]) {
-       try {
-           System.out.println(getMD5Checksum("MD5Checksum.java"));
-       }
-       catch (Exception e) {
-           e.printStackTrace();
-       }
    }
 }

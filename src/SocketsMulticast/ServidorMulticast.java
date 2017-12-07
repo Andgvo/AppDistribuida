@@ -53,10 +53,4 @@ public class ServidorMulticast implements Runnable{
             }
         }
     }
-    
-    public static void main(String[] args) throws IOException {
-        ServidorMulticast sm = new ServidorMulticast("EdgarServer", "localhost", 8001);
-        Thread tr = new Thread(sm);
-        tr.start();
-    }
 }

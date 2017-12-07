@@ -1,6 +1,5 @@
 package test;
 
-import Frames.Menu;
 import RMI.ServidorRMI;
 import SocketsMulticast.*;
 import java.awt.Color;
@@ -97,51 +96,31 @@ public class Main extends JFrame implements ActionListener{
     public void iniciarServicios(String nick) throws IOException{
         Usuarios usersList = new Usuarios();
         int port = 8000;
+        ServerSocket ss = null; 
         while(true){
             try {
-                ServerSocket ss = new ServerSocket(port);
+                ss = new ServerSocket(port);
                 System.out.println("SE conecto con puerto: " + port);
                 break;
             } catch(Exception ex){
                 port++;
             }
         }
-        
-        ClienteMulticast cm = new ClienteMulticast(nick, usersList);
-        ServidorMulticast sm = new ServidorMulticast(nick, "localhost", port);
-        
 
+        //Iniciar Frame Menu
+        Usuario myUser = new Usuario(nick, "localhost", port);
         
-        Thread trSM = new Thread(sm);
-        Thread trCM = new Thread(cm);
-        trSM.start();
-        trCM.start();
-
-        //Iniciar Servidor RMI
-        ServidorRMI.iniciarServidorRMI(nick);
-        
-        Menu menu = new Menu();
+        Menu menu = new Menu(myUser, usersList);
         menu.setVisible(true);
         dispose();
+         
+        //Iniciar Servicio Multicast
+        ServicioMulticast sm = new ServicioMulticast(nick, port, usersList, menu);
+        Thread trSM = new Thread(sm);
+        trSM.start();
         
-        System.out.println("Usuarios activos:\n");
-        while(true){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {}
-            usersList.lockList(); //Bloquear lista
-            Iterator<Usuario> iterUsers = usersList.iterator();
-            while(iterUsers.hasNext()){
-                Usuario user = iterUsers.next();
-                user.setTemp(user.getTemp()-1);
-                //Si llega a 0 el temporalizador, remover de la lista
-                if(user.getTemp() == 0){
-                    System.out.println("Se desconecto: " + user.getNickName());
-                    iterUsers.remove();
-                }
-            }
-            usersList.unlockList(); //Liberar Lista
-        }
+        //Iniciar Servicio RMI
+        ServidorRMI.iniciarServidorRMI(nick);
     }
     
     public static void main(String[] args) {
