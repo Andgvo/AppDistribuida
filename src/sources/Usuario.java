@@ -38,9 +38,4 @@ public class Usuario implements Serializable{
     public void setTemp(int temp) {
         this.temp = temp;
     }
-
-    /*@Override
-    public String toString() {
-        return "Usuario{" + "nameServer=" + nameServer + ", ipDir=" + ipDir + ", pto=" + pto + ", temp=" + temp + '}';
-    }*/
 }

@@ -142,6 +142,4 @@ public class ClienteFlujo implements Runnable{
         System.out.println("Hubo algun error");
         return false;
     }
-
-
 }

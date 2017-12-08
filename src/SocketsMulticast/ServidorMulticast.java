@@ -35,6 +35,7 @@ public class ServidorMulticast implements Runnable{
                 ObjectOutputStream oos = new ObjectOutputStream(baos);
                 oos.writeObject(user);
                 oos.flush();
+                
                 //Obtener bytes del objeto
                 byte[] b = baos.toByteArray();
                 //System.out.println("S enviaran los siguientes bytes: " + b.length);

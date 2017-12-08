@@ -3,8 +3,6 @@ package SocketsMulticast;
 import test.Menu;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sources.Usuario;
 import sources.Usuarios;
 

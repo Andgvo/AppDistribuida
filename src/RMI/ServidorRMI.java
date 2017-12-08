@@ -57,7 +57,6 @@ public class ServidorRMI implements Checksum{
         }
         return coincidencias;
     }
-    
 
     public static void iniciarServidorRMI(String nick){
         try {
