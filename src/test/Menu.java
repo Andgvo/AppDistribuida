@@ -172,7 +172,9 @@ public class Menu extends JFrame implements ActionListener{
         int row;
         if((row = jTblFiles.getSelectedRow()) != -1){
             String fileName = (String)jTblFiles.getValueAt(row, 0);
-            ClienteFlujo.downloadFile(fileName, usersList);
+            Boolean ok = ClienteFlujo.downloadFile(fileName, usersList, myUser.getNickName());
+            if(ok)
+                JOptionPane.showMessageDialog(null, "Archivo descargado correctamente.");
         }else
             JOptionPane.showMessageDialog(null, "Selecciona primero un archivo.");
     }

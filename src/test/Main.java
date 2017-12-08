@@ -1,5 +1,6 @@
 package test;
 
+import Envio.ServidorFlujo;
 import RMI.ServidorRMI;
 import SocketsMulticast.*;
 import java.awt.Color;
@@ -99,8 +100,10 @@ public class Main extends JFrame implements ActionListener{
         ServerSocket ss = null; 
         while(true){
             try {
-                ss = new ServerSocket(port);
+                ServidorFlujo sf = new ServidorFlujo(port, nick);
                 System.out.println("SE conecto con puerto: " + port);
+                Thread trSF = new Thread(sf);
+                trSF.start();
                 break;
             } catch(Exception ex){
                 port++;
